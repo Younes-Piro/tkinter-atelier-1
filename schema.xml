@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bibliotheque>
+	<livre genre="fiction" id="1">
+		<titre>Salam</titre>
+		<auteur>Salam</auteur>
+	</livre>
+	<livre genre="fiction" id="2">
+		<titre>Salam</titre>
+		<auteur>Salam</auteur>
+	</livre>
+	<livre genre="fiction" id="3">
+		<titre>titre1</titre>
+		<auteur>piro</auteur>
+	</livre>
+	<livre genre="drame" id="4">
+		<titre>ghazalaman</titre>
+		<auteur>l3azi no hope</auteur>
+	</livre>
+</bibliotheque>
