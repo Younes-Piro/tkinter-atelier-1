@@ -1,4 +1,3 @@
-<?xml version='1.0' encoding='UTF-8'?>
 <bibliotheque>
 	<livre genre="fiction" id="1">
 		<titre>Salam</titre>
@@ -12,8 +11,12 @@
 		<titre>titre1</titre>
 		<auteur>piro</auteur>
 	</livre>
-	<livre genre="drame" id="4">
-		<titre>ghazalaman</titre>
-		<auteur>l3azi no hope</auteur>
+	<livre genre="aventure" id="4">
+		<titre>titre1</titre>
+		<auteur>younes</auteur>
+	</livre>
+	<livre genre="policier" id="5">
+		<titre>titre2</titre>
+		<auteur>piro</auteur>
 	</livre>
 </bibliotheque>

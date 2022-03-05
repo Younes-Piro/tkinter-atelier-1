@@ -2,6 +2,7 @@ from tkinter import *
 from bs4 import BeautifulSoup 
 from tkinter import ttk
 from lxml import etree
+import xml.etree.cElementTree as ET
 
 root = Tk()
 root.title('atelier 1')
@@ -20,7 +21,21 @@ def edit():
 
 # Create Function to Delete A Record
 def delete():
-	pass
+    ntree = ET.parse('schema.xml')
+    root = ntree.getroot()
+    for livre in root.findall('livre'):
+        #get the email of the current record, 
+        ids = livre.get('id')
+        #check is this the email we are looking for?
+        id = int(my_data.focus())+1
+        for single_id in ids:
+            if int(single_id) == id:
+                root.remove(livre)            
+                #finally save the update
+                ntree.write("schema.xml") 
+            
+    #calling query to update the shows
+    query()
 
 
 # Create Submit Function For database
@@ -61,6 +76,10 @@ def submit():
 
 # Create Query Function
 def query():
+    #delete rows 
+    for row in my_data.get_children():
+        my_data.delete(row)
+
     #extract data
     with open('schema.xml', 'r') as f: 
         data = f.read() 
@@ -68,12 +87,10 @@ def query():
     Bs_data = BeautifulSoup(data, "xml") 
     
     b_unique = Bs_data.find_all('livre') 
-    print_records = ''
+
     for livre in b_unique:
-        print_records += livre['genre'] + " " + "\t" + livre.titre.text + " " + "\t" + livre.auteur.text + "\n"
-    	  
-    query_label = Label(root, text=print_records)
-    query_label.grid(row=12, column=0, columnspan=2)
+        my_data.insert(parent='',index='end',iid=(int(livre['id'])-1),text='',values=(livre['id'],livre['genre'],livre.titre.text,livre.auteur.text)) 
+    	
 
 
 # Create Text Boxes
@@ -101,9 +118,9 @@ delete_box_label.grid(row=9, column=0, pady=5)
 submit_btn = Button(root, text="Add Record To Database", command=submit)
 submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-# Create a Query Button
-query_btn = Button(root, text="Show Records", command=query)
-query_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
+# # Create a Query Button
+# query_btn = Button(root, text="Show Records", command=query)
+# query_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
 
 #Create A Delete Button
 delete_btn = Button(root, text="Delete Record", command=delete)
@@ -112,6 +129,31 @@ delete_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=136)
 # Create an Update Button
 edit_btn = Button(root, text="Edit Record", command=edit)
 edit_btn.grid(row=11, column=0, columnspan=2, pady=10, padx=10, ipadx=143)
+
+data_frame = Frame(root)
+data_frame.grid(row=12, column=0, columnspan=2, padx=10, pady=10)
+
+my_data = ttk.Treeview(data_frame)
+
+#define our column
+ 
+my_data['columns'] = ('livre', 'genre', 'titre', 'auteur')
+
+# format our column
+my_data.column("#0", width=0,  stretch=NO)
+my_data.column("livre",anchor=CENTER, width=80)
+my_data.column("genre",anchor=CENTER,width=80)
+my_data.column("titre",anchor=CENTER,width=80)
+my_data.column("auteur",anchor=CENTER,width=80)
+
+#Create Headings 
+my_data.heading("#0",text="",anchor=CENTER)
+my_data.heading("livre",text="livre",anchor=CENTER)
+my_data.heading("genre",text="genre",anchor=CENTER)
+my_data.heading("titre",text="titre",anchor=CENTER)
+my_data.heading("auteur",text="auteur",anchor=CENTER)
+
+my_data.grid(row=12, column=0, columnspan=2, padx=10, pady=10)
 
 query()
 
