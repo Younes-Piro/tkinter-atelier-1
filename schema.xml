@@ -1,22 +1,18 @@
 <bibliotheque>
-	<livre genre="fiction" id="1">
+	<livre genre="policier" id="1">
 		<titre>Salam</titre>
-		<auteur>Salam</auteur>
+		<auteur>amigo</auteur>
 	</livre>
 	<livre genre="fiction" id="2">
 		<titre>Salam</titre>
 		<auteur>Salam</auteur>
 	</livre>
-	<livre genre="fiction" id="3">
+	<livre genre="drame" id="3">
 		<titre>titre1</titre>
-		<auteur>piro</auteur>
+		<auteur>yani</auteur>
 	</livre>
 	<livre genre="aventure" id="4">
 		<titre>titre1</titre>
 		<auteur>younes</auteur>
 	</livre>
-	<livre genre="fiction" id="5">
-		<titre>title</titre>
-		<auteur>pigho</auteur>
-	</livre>
-</bibliotheque>
+	<livre genre="policier" id="5"><titre>title</titre><auteur>piro</auteur></livre></bibliotheque>
