@@ -15,10 +15,47 @@ def update():
 
 # Create Edit function to update a record
 def edit():
-	pass
+    root.withdraw()
+    global editor
+    editor = Tk()
+    editor.title('Update Records')
+    editor.geometry("400x300")
+
+    #Create Global Variables for text box names
+    global genre_editor
+    global titre_editor
+    global auteur_editor
+
+    # Create Text Boxes
+    genre_editor = Entry(editor,width=30)
+    genre_editor.grid(row=0, column=1, padx=20, pady=(10,0))
+    titre_editor = Entry(editor,width=30)
+    titre_editor.grid(row=1,column=1)
+    auteur_editor = Entry(editor,width=30)
+    auteur_editor.grid(row=2, column=1)
+
+    # Create Text Box Labels
+    genre_label = Label(editor, text="Genre")
+    genre_label.grid(row=0, column=0, pady=(10, 0))
+    titre_label = Label(editor, text="Titre")
+    titre_label.grid(row=1, column=0)
+    auteur_label = Label(editor, text="Auteur")
+    auteur_label.grid(row=2, column=0)
+
+    # Loop over our xml file and get the propre values
+    ntree = ET.parse('schema.xml')
+    root_xml = ntree.getroot()
+    id = int(my_data.focus())+1
+    for livre in root_xml.findall('livre'):
+        if int(livre.get('id')) == id:
+            genre_editor.insert(0,livre.get('genre'))
+            titre_editor.insert(0,livre.find('titre').text)
+            auteur_editor.insert(0,livre.find('auteur').text)
+
+    # Create a Save Button To Save edited record
+    edit_btn = Button(editor, text="Edit Record", command=update)
+    edit_btn.grid(row=6, column=0, columnspan=2, padx=10, pady=10, ipadx=145)
 	
-
-
 # Create Function to Delete A Record
 def delete():
     ntree = ET.parse('schema.xml')
