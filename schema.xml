@@ -15,8 +15,8 @@
 		<titre>titre1</titre>
 		<auteur>younes</auteur>
 	</livre>
-	<livre genre="policier" id="5">
-		<titre>titre2</titre>
-		<auteur>piro</auteur>
+	<livre genre="fiction" id="5">
+		<titre>title</titre>
+		<auteur>pigho</auteur>
 	</livre>
 </bibliotheque>

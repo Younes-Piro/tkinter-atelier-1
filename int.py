@@ -11,8 +11,21 @@ root.geometry("400x600")
 
 # Create Update function to update a record
 def update():
-	pass
-
+    ntree = ET.parse('schema.xml')
+    root_xml = ntree.getroot()
+    id = int(my_data.focus())+1
+    
+    for livre in root_xml.findall('livre'):
+        if int(livre.get('id')) == id:
+            livre.set('genre', genre_editor.get())
+            livre.find('auteur').text = auteur_editor.get()
+            livre.find('titre').text = titre_editor.get()
+             #save the update
+            ntree.write("schema.xml") 
+            
+    editor.destroy()
+    root.deiconify()
+    query()
 # Create Edit function to update a record
 def edit():
     root.withdraw()
@@ -26,9 +39,11 @@ def edit():
     global titre_editor
     global auteur_editor
 
+    genres = ["fiction", "drame","aventure","policier"]
     # Create Text Boxes
-    genre_editor = Entry(editor,width=30)
+    genre_editor = ttk.Combobox(editor,values=genres)
     genre_editor.grid(row=0, column=1, padx=20, pady=(10,0))
+    genre_editor.current(0)
     titre_editor = Entry(editor,width=30)
     titre_editor.grid(row=1,column=1)
     auteur_editor = Entry(editor,width=30)
@@ -48,7 +63,9 @@ def edit():
     id = int(my_data.focus())+1
     for livre in root_xml.findall('livre'):
         if int(livre.get('id')) == id:
-            genre_editor.insert(0,livre.get('genre'))
+            for idx,genre in enumerate(genres):
+                if genre == livre.get('genre'):
+                    genre_editor.current(idx)
             titre_editor.insert(0,livre.find('titre').text)
             auteur_editor.insert(0,livre.find('auteur').text)
 
