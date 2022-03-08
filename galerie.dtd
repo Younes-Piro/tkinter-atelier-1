@@ -1,0 +1,11 @@
+<!ELEMENT art (galerie+)>
+<!ELEMENT galerie (gerant,contenu)>
+<!ELEMENT gerant (#PCDATA)>
+<!ELEMENT contenu (type,auteur,titre,prix)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT auteur (#PCDATA)>
+<!ELEMENT titre (#PCDATA)>
+<!ELEMENT prix (#PCDATA)>
+
+<!ATTLIST galerie address CDATA #REQUIRED>
+<!ATTLIST galerie id CDATA #REQUIRED>

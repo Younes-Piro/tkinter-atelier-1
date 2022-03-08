@@ -1,0 +1,29 @@
+<art>
+    <galerie id="2" address="add">
+        <gerant>gee</gerant>
+        <contenu>
+            <type>tyy</type>
+            <auteur>auuu</auteur>
+            <titre>tiii</titre>
+            <prix>prii</prix>
+        </contenu>
+    </galerie>
+    <galerie id="3" address="gg">
+        <gerant>gg</gerant>
+        <contenu>
+            <type>gg</type>
+            <auteur>gg</auteur>
+            <titre>gg</titre>
+            <prix>gg</prix>
+        </contenu>
+    </galerie>
+    <galerie id="4" address="sssssssss">
+        <gerant>ssssssssss</gerant>
+        <contenu>
+            <type>ssssssssss</type>
+            <auteur>ssssssssssssss</auteur>
+            <titre>ssssssssssss</titre>
+            <prix>ssssssssss</prix>
+        </contenu>
+    </galerie>
+</art>

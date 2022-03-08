@@ -1,17 +1,22 @@
 from tkinter import *
-from bs4 import BeautifulSoup 
 from tkinter import ttk
 from lxml import etree
 import xml.etree.cElementTree as ET
+import lxml.etree
 
 root = Tk()
 root.title('atelier 1')
 root.geometry("400x600")
 
+def validate():
+    xml_file = lxml.etree.parse("biblio.xml")
+    xml_validator = lxml.etree.DTD(file="bibliotheque.dtd")
+    is_valid = xml_validator.validate(xml_file)
+    print(is_valid)
 
 # Create Update function to update a record
 def update():
-    ntree = ET.parse('schema.xml')
+    ntree = ET.parse('biblio.xml')
     root_xml = ntree.getroot()
     id = int(my_data.focus())+1
     
@@ -21,7 +26,7 @@ def update():
             livre.find('auteur').text = auteur_editor.get()
             livre.find('titre').text = titre_editor.get()
              #save the update
-            ntree.write("schema.xml") 
+            ntree.write("biblio.xml") 
             
     editor.destroy()
     root.deiconify()
@@ -57,7 +62,7 @@ def edit():
     auteur_label = Label(editor, text="Auteur")
     auteur_label.grid(row=2, column=0)
 
-    ntree = ET.parse('schema.xml')
+    ntree = ET.parse('biblio.xml')
     root_xml = ntree.getroot()
     # Loop over our xml file and get the propre values
     id = int(my_data.focus())+1
@@ -76,7 +81,7 @@ def edit():
 # Create Function to Delete A Record
 def delete():
 
-    ntree = ET.parse('schema.xml')
+    ntree = ET.parse('biblio.xml')
     root_xml = ntree.getroot()
 
     for livre in root_xml.findall('livre'):
@@ -88,7 +93,7 @@ def delete():
             if int(single_id) == id:
                 root_xml.remove(livre)            
                 #finally save the update
-                ntree.write("schema.xml") 
+                ntree.write("biblio.xml") 
             
     #calling query to update the shows
     query()
@@ -98,7 +103,7 @@ def delete():
 def submit():
 
     #get last id
-    ntree = ET.parse('schema.xml')
+    ntree = ET.parse('biblio.xml')
     root_xml = ntree.getroot()
     
     ids = list()
@@ -106,7 +111,7 @@ def submit():
         ids.append(livre.get('id'))
 
     #gettin data from form and adding to xml file
-    root = etree.parse("schema.xml").getroot()
+    root = etree.parse("biblio.xml").getroot()
     biblio = etree.Element("bibliotheque")
     livre = etree.SubElement(biblio, "livre")
     livre.set("genre", genre.get())
@@ -117,7 +122,7 @@ def submit():
     metier.text = auteur.get()
     root.append(livre)
     tree = etree.ElementTree(root)
-    tree.write('schema.xml', pretty_print=True, xml_declaration=True, encoding="utf-8")
+    tree.write('biblio.xml', pretty_print=True, xml_declaration=True, encoding="utf-8")
 
     #Clear the boxes
     genre.current(0)
@@ -129,7 +134,7 @@ def submit():
 
 # Create Query Function
 def query():
-    ntree = ET.parse('schema.xml')
+    ntree = ET.parse('biblio.xml')
     root_xml = ntree.getroot()
     #delete rows 
     for row in my_data.get_children():
@@ -201,6 +206,9 @@ my_data.heading("auteur",text="auteur",anchor=CENTER)
 
 my_data.grid(row=12, column=0, columnspan=2, padx=10, pady=10)
 
-query()
+if validate:
+    query()
+else:
+    print("XML FILE IS INVALID")
 
 root.mainloop()
