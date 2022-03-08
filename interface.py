@@ -147,8 +147,8 @@ titre = Entry(root, width=30)
 titre.grid(row=1, column=1)
 auteur = Entry(root, width=30)
 auteur.grid(row=2, column=1)
-delete_box = Entry(root, width=30)
-delete_box.grid(row=9, column=1, pady=5)
+# delete_box = Entry(root, width=30)
+# delete_box.grid(row=9, column=1, pady=5)
 
 # Create Text Box Labels
 genre_label = Label(root, text="Genre")
@@ -157,8 +157,8 @@ titre_label = Label(root, text="Titre")
 titre_label.grid(row=1, column=0)
 auteur_label = Label(root, text="Auteur")
 auteur_label.grid(row=2, column=0)
-delete_box_label = Label(root, text="Select ID")
-delete_box_label.grid(row=9, column=0, pady=5)
+# delete_box_label = Label(root, text="Select ID")
+# delete_box_label.grid(row=9, column=0, pady=5)
 
 # Create Submit Button
 submit_btn = Button(root, text="Add Record To Database", command=submit)

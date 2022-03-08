@@ -3,16 +3,12 @@
 		<titre>Salam</titre>
 		<auteur>amigo</auteur>
 	</livre>
-	<livre genre="fiction" id="2">
-		<titre>Salam</titre>
-		<auteur>Salam</auteur>
-	</livre>
-	<livre genre="drame" id="3">
-		<titre>titre1</titre>
-		<auteur>yani</auteur>
-	</livre>
-	<livre genre="aventure" id="4">
+	<livre genre="policier" id="4">
 		<titre>titre1</titre>
 		<auteur>younes</auteur>
 	</livre>
-	<livre genre="policier" id="5"><titre>title</titre><auteur>piro</auteur></livre></bibliotheque>
+	<livre genre="aventure" id="5">
+		<titre>titrre</titre>
+		<auteur>auteur</auteur>
+	</livre>
+</bibliotheque>
